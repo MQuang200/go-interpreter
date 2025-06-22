@@ -1,4 +1,3 @@
-
-module github.com/codecrafters-io/interpreter-starter-go
+module github.com/MQuang200/go-interpreter
 
 go 1.24.0

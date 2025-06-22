@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
+
+	"github.com/MQuang200/go-interpreter/src/scanner"
 )
 
 func main() {
@@ -26,8 +28,10 @@ func main() {
 	}
 
 	if len(fileContents) > 0 {
-		panic("Scanner not implemented")
-	} else {
-		fmt.Println("EOF  null") // Placeholder, replace this line when implementing the scanner
+    tokens := scanner.Scan(fileContents)
+    for _, token := range(tokens) {
+      fmt.Println(token.String())
+    }
 	}
+  fmt.Println("EOF  null")
 }
