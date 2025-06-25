@@ -1,6 +1,8 @@
 package scanner
 
-import "github.com/MQuang200/go-interpreter/src/token"
+import (
+	"github.com/MQuang200/go-interpreter/src/token"
+)
 
 func Scan(content []byte) []token.Token{
 	tokens := []token.Token{}
