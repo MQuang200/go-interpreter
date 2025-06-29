@@ -3,11 +3,13 @@ package token
 type TokenType string
 
 const (
-  EOF TokenType = "EOF"
   LEFT_PAREN = "LEFT_PAREN"
   RIGHT_PAREN = "RIGHT_PAREN"
   LEFT_BRACE = "LEFT_BRACE"
   RIGHT_BRACE = "RIGHT_BRACE"
+
+  // EOF
+  EOF TokenType = "EOF"
 )
 
 type Token struct {
