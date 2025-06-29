@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"os"
 
@@ -22,6 +23,7 @@ func main() {
 
 	filename := os.Args[2]
 	fileContents, err := os.ReadFile(filename)
+  fileContents = bytes.TrimSpace(fileContents)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error reading file: %v\n", err)
 		os.Exit(1)
@@ -33,5 +35,4 @@ func main() {
       fmt.Println(token.String())
     }
 	}
-  fmt.Println("EOF  null")
 }

@@ -1,6 +1,8 @@
 package scanner
 
 import (
+	"fmt"
+
 	"github.com/MQuang200/go-interpreter/src/token"
 )
 
@@ -29,8 +31,12 @@ func Scan(content []byte) []token.Token{
       tokens = append(tokens, newToken(token.SEMICOLON, char, nil))
     case '*':
       tokens = append(tokens, newToken(token.STAR, char, nil))
+    default:
+      printError(1, char)
     }
 	}
+
+  tokens = append(tokens, newToken(token.EOF, byte(0), nil))
 
   return tokens
 }
@@ -41,4 +47,8 @@ func newToken(tokenType token.TokenType, char byte, value interface{}) token.Tok
     Text: string(char),
     Value: value,
   }
+}
+
+func printError(line int, char byte) {
+  fmt.Printf("[line %d] Error: Unexpected character: %s\n", line, string(char))
 }
