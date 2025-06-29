@@ -2,12 +2,14 @@ package scanner
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/MQuang200/go-interpreter/src/token"
 )
 
-func Scan(content []byte) []token.Token{
+func Scan(content []byte) ([]token.Token, bool) {
 	tokens := []token.Token{}
+  hadError := false
 
 	for _, char := range content {
 		switch char {
@@ -33,12 +35,13 @@ func Scan(content []byte) []token.Token{
       tokens = append(tokens, newToken(token.STAR, char, nil))
     default:
       printError(1, char)
+      hadError = true
     }
 	}
 
   tokens = append(tokens, newToken(token.EOF, byte(0), nil))
 
-  return tokens
+  return tokens, hadError
 }
 
 func newToken(tokenType token.TokenType, char byte, value interface{}) token.Token{
@@ -50,5 +53,5 @@ func newToken(tokenType token.TokenType, char byte, value interface{}) token.Tok
 }
 
 func printError(line int, char byte) {
-  fmt.Printf("[line %d] Error: Unexpected character: %s\n", line, string(char))
+  fmt.Fprintf(os.Stderr, "[line %d] Error: Unexpected character: %s\n", line, string(char))
 }

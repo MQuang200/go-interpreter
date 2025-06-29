@@ -30,9 +30,13 @@ func main() {
 	}
 
 	if len(fileContents) > 0 {
-    tokens := scanner.Scan(fileContents)
+    tokens, hadError := scanner.Scan(fileContents)
     for _, token := range(tokens) {
       fmt.Println(token.String())
+    }
+
+    if hadError {
+      os.Exit(65)
     }
 	}
 }
