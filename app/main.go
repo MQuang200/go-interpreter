@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/MQuang200/go-interpreter/src/scanner"
+	t "github.com/MQuang200/go-interpreter/src/token"
 )
 
 func main() {
@@ -32,7 +33,11 @@ func main() {
 	if len(fileContents) > 0 {
     tokens, hadError := scanner.Scan(fileContents)
     for _, token := range(tokens) {
-      fmt.Println(token.String())
+      if token.TokenType == t.EOF {
+        fmt.Println(token.EOFString())
+      } else {
+        fmt.Println(token.String())
+      }
     }
 
     if hadError {

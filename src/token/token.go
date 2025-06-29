@@ -36,3 +36,7 @@ func(t Token) String() string{
   }
   return string(t.TokenType) + " " + t.Text + " " + value
 }
+
+func (t Token) EOFString() string{
+  return string(EOF) + "  null"
+}
