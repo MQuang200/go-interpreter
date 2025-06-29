@@ -1,6 +1,7 @@
 package scanner
 
 import (
+	"bytes"
 	"fmt"
 	"os"
 
@@ -8,6 +9,8 @@ import (
 )
 
 func Scan(content []byte) ([]token.Token, bool) {
+  content = bytes.TrimSpace(content)
+
 	tokens := []token.Token{}
   hadError := false
 
