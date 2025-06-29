@@ -13,6 +13,10 @@ func Scan(content []byte) []token.Token{
       tokens = append(tokens, newToken(token.LEFT_PAREN, char, nil))
     case ')':
       tokens = append(tokens, newToken(token.RIGHT_PAREN, char, nil))
+    case '{':
+      tokens = append(tokens, newToken(token.LEFT_BRACE, char, nil))
+    case '}':
+      tokens = append(tokens, newToken(token.RIGHT_BRACE, char, nil))
     }
 	}
 
