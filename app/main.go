@@ -28,18 +28,16 @@ func main() {
 		os.Exit(1)
 	}
 
-	if len(fileContents) > 0 {
-    tokens, hadError := scanner.Scan(fileContents)
-    for _, token := range(tokens) {
-      if token.TokenType == t.EOF {
-        fmt.Println(token.EOFString())
-      } else {
-        fmt.Println(token.String())
-      }
+  tokens, hadError := scanner.Scan(fileContents)
+  for _, token := range(tokens) {
+    if token.TokenType == t.EOF {
+      fmt.Println(token.EOFString())
+    } else {
+      fmt.Println(token.String())
     }
+  }
 
-    if hadError {
-      os.Exit(65)
-    }
-	}
+  if hadError {
+    os.Exit(65)
+  }
 }
