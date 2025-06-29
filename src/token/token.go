@@ -3,10 +3,19 @@ package token
 type TokenType string
 
 const (
+  // single characters
+
   LEFT_PAREN = "LEFT_PAREN"
   RIGHT_PAREN = "RIGHT_PAREN"
   LEFT_BRACE = "LEFT_BRACE"
   RIGHT_BRACE = "RIGHT_BRACE"
+  COMMA = "COMMA"
+  DOT = "DOT"
+  MINUS = "MINUS"
+  PLUS = "PLUS"
+  SEMICOLON = "SEMICOLON"
+  SLASH = "SLASH"
+  STAR = "STAR"
 
   // EOF
   EOF TokenType = "EOF"
