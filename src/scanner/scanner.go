@@ -51,10 +51,8 @@ func newToken(tokenType token.TokenType, char byte, value interface{}) token.Tok
   return token.Token{
     TokenType: tokenType,
     Text: string(char),
-    Value: value,
-  }
+    Value: value, }
 }
 
 func printError(line int, char byte) {
-  fmt.Fprintf(os.Stderr, "[line %d] Error: Unexpected character: %s\n", line, string(char))
-}
+  fmt.Fprintf(os.Stderr, "[line %d] Error: Unexpected character: %s\n", line, string(char)) }
