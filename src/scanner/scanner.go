@@ -9,50 +9,44 @@ import (
 )
 
 func Scan(content []byte) ([]token.Token, bool) {
-  content = bytes.TrimSpace(content)
+	content = bytes.TrimSpace(content)
 
 	tokens := []token.Token{}
-  hadError := false
+	hadError := false
 
 	for _, char := range content {
 		switch char {
 		case '(':
-      tokens = append(tokens, newToken(token.LEFT_PAREN, char, nil))
-    case ')':
-      tokens = append(tokens, newToken(token.RIGHT_PAREN, char, nil))
-    case '{':
-      tokens = append(tokens, newToken(token.LEFT_BRACE, char, nil))
-    case '}':
-      tokens = append(tokens, newToken(token.RIGHT_BRACE, char, nil))
-    case '.':
-      tokens = append(tokens, newToken(token.DOT, char, nil))
-    case ',':
-      tokens = append(tokens, newToken(token.COMMA, char, nil))
-    case '-':
-      tokens = append(tokens, newToken(token.MINUS, char, nil))
-    case '+':
-      tokens = append(tokens, newToken(token.PLUS, char, nil))
-    case ';':
-      tokens = append(tokens, newToken(token.SEMICOLON, char, nil))
-    case '*':
-      tokens = append(tokens, newToken(token.STAR, char, nil))
-    default:
-      printError(1, char)
-      hadError = true
-    }
+			tokens = append(tokens, token.NewToken(token.LEFT_PAREN, char, nil))
+		case ')':
+			tokens = append(tokens, token.NewToken(token.RIGHT_PAREN, char, nil))
+		case '{':
+			tokens = append(tokens, token.NewToken(token.LEFT_BRACE, char, nil))
+		case '}':
+			tokens = append(tokens, token.NewToken(token.RIGHT_BRACE, char, nil))
+		case '.':
+			tokens = append(tokens, token.NewToken(token.DOT, char, nil))
+		case ',':
+			tokens = append(tokens, token.NewToken(token.COMMA, char, nil))
+		case '-':
+			tokens = append(tokens, token.NewToken(token.MINUS, char, nil))
+		case '+':
+			tokens = append(tokens, token.NewToken(token.PLUS, char, nil))
+		case ';':
+			tokens = append(tokens, token.NewToken(token.SEMICOLON, char, nil))
+		case '*':
+			tokens = append(tokens, token.NewToken(token.STAR, char, nil))
+		default:
+			printError(1, char)
+			hadError = true
+		}
 	}
 
-  tokens = append(tokens, newToken(token.EOF, byte(0), nil))
+	tokens = append(tokens, token.NewToken(token.EOF, byte(0), nil))
 
-  return tokens, hadError
-}
-
-func newToken(tokenType token.TokenType, char byte, value interface{}) token.Token{
-  return token.Token{
-    TokenType: tokenType,
-    Text: string(char),
-    Value: value, }
+	return tokens, hadError
 }
 
 func printError(line int, char byte) {
-  fmt.Fprintf(os.Stderr, "[line %d] Error: Unexpected character: %s\n", line, string(char)) }
+	fmt.Fprintf(os.Stderr, "[line %d] Error: Unexpected character: %s\n", line, string(char))
+}
