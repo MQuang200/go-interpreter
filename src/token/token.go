@@ -3,6 +3,7 @@ package token
 type TokenType string
 
 const (
+<<<<<<< HEAD
 	// unspecified
 	UNSPECIFIED TokenType = ""
 
@@ -20,6 +21,21 @@ const (
 	STAR        TokenType = "STAR"
 	EQUAL       TokenType = "EQUAL"
 	EQUAL_EQUAL TokenType = "EQUAL_EQUAL"
+=======
+	// single characters
+
+	LEFT_PAREN  = "LEFT_PAREN"
+	RIGHT_PAREN = "RIGHT_PAREN"
+	LEFT_BRACE  = "LEFT_BRACE"
+	RIGHT_BRACE = "RIGHT_BRACE"
+	COMMA       = "COMMA"
+	DOT         = "DOT"
+	MINUS       = "MINUS"
+	PLUS        = "PLUS"
+	SEMICOLON   = "SEMICOLON"
+	SLASH       = "SLASH"
+	STAR        = "STAR"
+>>>>>>> ad204e3 (refactor codebase)
 
 	// EOF
 	EOF TokenType = "EOF"
@@ -38,10 +54,25 @@ func (t Token) String() string {
 	} else {
 		value = t.Value.(string)
 	}
+<<<<<<< HEAD
 
 	return string(t.TokenType) + " " + t.Text + " " + value
 }
 
 func (t Token) EOFString() string {
 	return string(EOF) + " null"
+=======
+	return string(t.TokenType) + " " + t.Text + " " + value
+}
+
+func NewToken(tokenType TokenType, char byte, value interface{}) Token {
+	return Token{
+		TokenType: tokenType,
+		Text:      string(char),
+		Value:     value}
+}
+
+func (t Token) EOFString() string {
+	return string(EOF) + "  null"
+>>>>>>> ad204e3 (refactor codebase)
 }
