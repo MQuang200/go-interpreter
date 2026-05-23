@@ -14,6 +14,7 @@ func Scan(content []byte) ([]token.Token, bool) {
 	tokens := []token.Token{}
 	hadError := false
 
+<<<<<<< HEAD
 	for i := 0; i < len(content); i++ {
 		char := content[i]
 		tType, tText := classifyToken(content, &i)
@@ -84,6 +85,39 @@ func newToken(tokenType token.TokenType, tokenStr string, value interface{}) tok
 		TokenType: tokenType,
 		Text:      tokenStr,
 		Value:     value}
+=======
+	for _, char := range content {
+		switch char {
+		case '(':
+			tokens = append(tokens, token.NewToken(token.LEFT_PAREN, char, nil))
+		case ')':
+			tokens = append(tokens, token.NewToken(token.RIGHT_PAREN, char, nil))
+		case '{':
+			tokens = append(tokens, token.NewToken(token.LEFT_BRACE, char, nil))
+		case '}':
+			tokens = append(tokens, token.NewToken(token.RIGHT_BRACE, char, nil))
+		case '.':
+			tokens = append(tokens, token.NewToken(token.DOT, char, nil))
+		case ',':
+			tokens = append(tokens, token.NewToken(token.COMMA, char, nil))
+		case '-':
+			tokens = append(tokens, token.NewToken(token.MINUS, char, nil))
+		case '+':
+			tokens = append(tokens, token.NewToken(token.PLUS, char, nil))
+		case ';':
+			tokens = append(tokens, token.NewToken(token.SEMICOLON, char, nil))
+		case '*':
+			tokens = append(tokens, token.NewToken(token.STAR, char, nil))
+		default:
+			printError(1, char)
+			hadError = true
+		}
+	}
+
+	tokens = append(tokens, token.NewToken(token.EOF, byte(0), nil))
+
+	return tokens, hadError
+>>>>>>> ad204e3 (refactor codebase)
 }
 
 func printError(line int, char byte) {
