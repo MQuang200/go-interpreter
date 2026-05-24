@@ -14,8 +14,8 @@ func Scan(content []byte) ([]token.Token, bool) {
 	tokens := []token.Token{}
 	hadError := false
 
-	for _, char := range content {
-		switch char {
+	for i := 0; i < len(content); i++ {
+		switch char := content[i]; char {
 		case '(':
 			tokens = append(tokens, newToken(token.LEFT_PAREN, string(char), nil))
 		case ')':
@@ -37,10 +37,9 @@ func Scan(content []byte) ([]token.Token, bool) {
 		case '*':
 			tokens = append(tokens, newToken(token.STAR, string(char), nil))
 		case '=':
-			s := len(tokens)
-			if len(tokens) != 0 && tokens[s-1].TokenType == token.EQUAL {
-				tokens = tokens[:s-1]
+			if i < len(content)-1 && content[i+1] == '=' {
 				tokens = append(tokens, newToken(token.EQUAL_EQUAL, "==", nil))
+				i++
 			} else {
 				tokens = append(tokens, newToken(token.EQUAL, string(char), nil))
 			}
