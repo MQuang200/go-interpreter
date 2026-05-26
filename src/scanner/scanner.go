@@ -15,43 +15,68 @@ func Scan(content []byte) ([]token.Token, bool) {
 	hadError := false
 
 	for i := 0; i < len(content); i++ {
-		switch char := content[i]; char {
-		case '(':
-			tokens = append(tokens, newToken(token.LEFT_PAREN, string(char), nil))
-		case ')':
-			tokens = append(tokens, newToken(token.RIGHT_PAREN, string(char), nil))
-		case '{':
-			tokens = append(tokens, newToken(token.LEFT_BRACE, string(char), nil))
-		case '}':
-			tokens = append(tokens, newToken(token.RIGHT_BRACE, string(char), nil))
-		case '.':
-			tokens = append(tokens, newToken(token.DOT, string(char), nil))
-		case ',':
-			tokens = append(tokens, newToken(token.COMMA, string(char), nil))
-		case '-':
-			tokens = append(tokens, newToken(token.MINUS, string(char), nil))
-		case '+':
-			tokens = append(tokens, newToken(token.PLUS, string(char), nil))
-		case ';':
-			tokens = append(tokens, newToken(token.SEMICOLON, string(char), nil))
-		case '*':
-			tokens = append(tokens, newToken(token.STAR, string(char), nil))
-		case '=':
-			if i < len(content)-1 && content[i+1] == '=' {
-				tokens = append(tokens, newToken(token.EQUAL_EQUAL, "==", nil))
-				i++
-			} else {
-				tokens = append(tokens, newToken(token.EQUAL, string(char), nil))
-			}
-		default:
+		char := content[i]
+		tType, tText := classifyToken(content, &i)
+		if tType == token.UNSPECIFIED {
 			printError(1, char)
 			hadError = true
+			continue
 		}
+		tokens = append(tokens, newToken(tType, tText, nil))
 	}
 
 	tokens = append(tokens, newToken(token.EOF, "", nil))
 
 	return tokens, hadError
+}
+
+func classifyToken(content []byte, i *int) (token.TokenType, string) {
+	var tt token.TokenType
+	var ttStr string
+	switch content[*i] {
+	case '(':
+		tt = token.LEFT_PAREN
+		ttStr = "("
+	case ')':
+		tt = token.RIGHT_PAREN
+		ttStr = ")"
+	case '{':
+		tt = token.LEFT_BRACE
+		ttStr = "{"
+	case '}':
+		tt = token.RIGHT_BRACE
+		ttStr = "}"
+	case '.':
+		tt = token.DOT
+		ttStr = "."
+	case ',':
+		tt = token.COMMA
+		ttStr = ","
+	case '-':
+		tt = token.MINUS
+		ttStr = "-"
+	case '+':
+		tt = token.PLUS
+		ttStr = "+"
+	case ';':
+		tt = token.SEMICOLON
+		ttStr = ";"
+	case '*':
+		tt = token.STAR
+		ttStr = "*"
+	case '=':
+		if *i < len(content)-1 && content[*i+1] == '=' {
+			tt = token.EQUAL_EQUAL
+			ttStr = "=="
+			*i++
+		} else {
+			tt = token.EQUAL
+			ttStr = "="
+		}
+	default:
+		tt = token.UNSPECIFIED
+	}
+	return tt, ttStr
 }
 
 func newToken(tokenType token.TokenType, tokenStr string, value interface{}) token.Token {

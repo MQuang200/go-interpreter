@@ -3,8 +3,10 @@ package token
 type TokenType string
 
 const (
-	// single characters
+	// unspecified
+	UNSPECIFIED TokenType = ""
 
+	// single characters
 	LEFT_PAREN  TokenType = "LEFT_PAREN"
 	RIGHT_PAREN TokenType = "RIGHT_PAREN"
 	LEFT_BRACE  TokenType = "LEFT_BRACE"
