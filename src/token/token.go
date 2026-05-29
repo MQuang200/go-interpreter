@@ -18,8 +18,12 @@ const (
 	SEMICOLON   TokenType = "SEMICOLON"
 	SLASH       TokenType = "SLASH"
 	STAR        TokenType = "STAR"
+
+	// single or double characters
 	EQUAL       TokenType = "EQUAL"
 	EQUAL_EQUAL TokenType = "EQUAL_EQUAL"
+	BANG        TokenType = "BANG"
+	BANG_EQUAL  TokenType = "BANG_EQUAL"
 
 	// EOF
 	EOF TokenType = "EOF"

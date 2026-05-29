@@ -73,6 +73,15 @@ func classifyToken(content []byte, i *int) (token.TokenType, string) {
 			tt = token.EQUAL
 			ttStr = "="
 		}
+	case '!':
+		if *i < len(content)-1 && content[*i+1] == '=' {
+			tt = token.BANG_EQUAL
+			ttStr = "!="
+			*i++
+		} else {
+			tt = token.BANG
+			ttStr = "!"
+		}
 	default:
 		tt = token.UNSPECIFIED
 	}
