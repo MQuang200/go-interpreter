@@ -47,5 +47,5 @@ func (t Token) String() string {
 }
 
 func (t Token) EOFString() string {
-	return string(EOF) + " null"
+	return string(EOF) + "  null"
 }
